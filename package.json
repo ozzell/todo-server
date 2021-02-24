@@ -1,9 +1,9 @@
 {
   "name": "todo-server",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "lint": "eslint . --ext ts"
   },
