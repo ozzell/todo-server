@@ -1,12 +1,15 @@
 import express from 'express'
 import todoRouter from './routes/todoRouter'
+import { unknownEndpoint } from './utils/middleware'
 
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('Hello todo')
+  res.send('Todo App Api')
 })
 
-app.use('/todos', todoRouter)
+app.use('/api/v1/todos', todoRouter)
+
+app.use(unknownEndpoint)
 
 export default app
