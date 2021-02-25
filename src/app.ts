@@ -4,6 +4,8 @@ import { unknownEndpoint } from './utils/middleware'
 
 const app = express()
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
   res.send('Todo App Api')
 })

@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon -r dotenv/config src/index.ts",
     "build": "tsc",
     "lint": "eslint . --ext ts",
-    "test": "cross-env NODE_ENV=test jest --verbose"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "Jaakko Mäkilaurila",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.11.18",
     "typescript": "^4.2.2"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
