@@ -14,15 +14,21 @@ todoRouter.post('/', (req, res) => {
   const { text, done }: TodoSchema = req.body
   const todo = new Todo({ text, done })
   todo.save().then(savedTodo => {
-    res.json(savedTodo)
+    res.status(201).json(savedTodo)
   })
 })
 
-// TODO: PUT (mark as done)
 todoRouter.put('/:id', (req, res) => {
-
+  const { done } = req.body
+  Todo.findByIdAndUpdate(req.params.id, { done }, { new: true }).then(result => {
+    res.json(result)
+  })
 })
 
-// TODO: DELETE
+todoRouter.delete('/:id', (req, res) => {
+  Todo.findByIdAndDelete(req.params.id).then(result => {
+    res.json(result)
+  })
+})
 
 export default todoRouter
