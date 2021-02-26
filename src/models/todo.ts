@@ -1,12 +1,5 @@
 import mongoose from 'mongoose'
-
-type TodoSchema = {
-  id: string
-  _id?: object
-  __v?: number
-  text: string
-  done: boolean
-}
+import { TodoSchema } from './types'
 
 const url = process.env.MONGODB_URI as string
 mongoose.connect(url,
@@ -29,7 +22,8 @@ const todoSchema = new mongoose.Schema({
 
 todoSchema.set('toJSON', {
   transform: (_document: unknown, returnedObject: TodoSchema) => {
-    returnedObject.id = (returnedObject._id as TodoSchema).toString()
+    returnedObject.id = (returnedObject._id as mongoose.Types.ObjectId).toString()
+    returnedObject.date = (returnedObject._id as mongoose.Types.ObjectId).getTimestamp()
     delete returnedObject._id
     delete returnedObject.__v
   }
