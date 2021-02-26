@@ -1,6 +1,6 @@
 import express from 'express'
 import todoRouter from './routes/todoRouter'
-import { unknownEndpoint } from './utils/middleware'
+import { unknownEndpoint, errorHandler } from './utils/middleware'
 
 const app = express()
 
@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1/todos', todoRouter)
-
 app.use(unknownEndpoint)
+app.use(errorHandler)
 
 export default app
