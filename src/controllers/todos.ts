@@ -13,6 +13,7 @@ export const getTodos = (req: Request, res: Response, next: NextFunction) => {
 export const postTodo = (req: Request, res: Response, next: NextFunction) => {
   const { text, done }: TodoSchema = req.body
   const todo = new Todo({ text, done })
+  // TODO: Validate body fields before writing them into database (ajv-validator)
   todo.save()
     .then(savedTodo => {
       res.status(201).json(savedTodo)

@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
 import { TodoSchema } from './types'
 
-const url = process.env.MONGODB_URI as string
+const url = process.env.NODE_ENV === 'test'
+  ? process.env.TEST_MONGODB_URI as string
+  : process.env.MONGODB_URI as string
+
 mongoose.connect(url,
   {
     useNewUrlParser: true,

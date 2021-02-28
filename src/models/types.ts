@@ -8,3 +8,5 @@ export type TodoSchema = {
   done: boolean
   date: Date
 }
+
+export type TodoSent = Omit<TodoSchema, 'id' | 'date'>
