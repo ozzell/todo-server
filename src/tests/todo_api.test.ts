@@ -47,11 +47,25 @@ describe('Todo API', () => {
     expect(body).toHaveProperty('date')
   })
 
+  it('POST should return invalid input error if text input is empty', async () => {
+    const response = await request.post(todoApiPath).send({ text: '', done: false })
+    const body = response.body
+    expect(response.status).toBe(400)
+    expect(body.error).toBe('invalid input')
+  })
+
   it('PUT should mark a todo resource as done succesfully and return the updated resource', async () => {
     const response = await request.put(`${todoApiPath}/${currentTodo.id}`).send({ done: true })
     const body = response.body
     expect(response.status).toBe(200)
     expect(body.done).toBe(true)
+  })
+
+  it('PUT should return invalid input error if done input is not of boolean type', async () => {
+    const response = await request.put(`${todoApiPath}/${currentTodo.id}`).send({ done: 'true' })
+    const body = response.body
+    expect(response.status).toBe(400)
+    expect(body.error).toBe('invalid input')
   })
 
   it('DELETE should delete a todo resource succesfully and return the deleted resource', async () => {
@@ -76,7 +90,7 @@ describe('Error handler', () => {
   })
 
   it('PUT should return 204 and no content if id was correct format but no resource was found', async () => {
-    const response = await request.put(`${todoApiPath}/${nonExistingResourceId}`)
+    const response = await request.put(`${todoApiPath}/${nonExistingResourceId}`).send({ done: true })
     expect(response.status).toBe(204)
   })
 
